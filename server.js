@@ -1,16 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const loginRouter = require('./routes/login');
-const cors = require('cors'); // Import the 'cors' middleware
+const path = require('path'); // Import the 'path' module
+const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 3001;
 
 // Middleware for handling CORS
-app.use(cors()); // Enable CORS for all routes
-
-// Body parsing middleware
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -23,16 +22,15 @@ mongoose
     .then(() => console.log(`Database connected successfully`))
     .catch((err) => console.error('Database connection error:', err));
 
-// Redirect root URL to the login route
-app.get('/', (req, res) => {
-    res.redirect('/login');
-});
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 // Mounting the login route
 app.use('/login', loginRouter);
 
-app.use((req, res, next) => {
-    res.status(404).send("Sorry, the requested route doesn't exist.");
+// All other routes should serve the React app
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client/build/index.html'));
 });
 
 // Starting the server
