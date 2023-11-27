@@ -2,7 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-const User = require('./models/User'); // Import your User model
+const User = require('../models/User'); // Import your User model
 const bcrypt = require('bcrypt');
 
 router.post('/', async (req, res) => {
