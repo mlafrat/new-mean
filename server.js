@@ -32,6 +32,10 @@ app.get('/', (req, res) => {
 // Mounting the login route
 app.use('/login', loginRouter);
 
+app.use((req, res, next) => {
+    res.status(404).send("Sorry, the requested route doesn't exist.");
+});
+
 // Starting the server
 app.listen(port, () => {
     console.log(`Server listening on port ${port}.`);
