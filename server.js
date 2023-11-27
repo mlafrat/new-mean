@@ -1,14 +1,13 @@
 const express = require('express');
-const mongoose = require('mongoose'); // Import mongoose for database connection
+const mongoose = require('mongoose');
 const loginRouter = require('./routes/login');
-require('dotenv').config()
+require('dotenv').config();
+
 const app = express();
 const port = process.env.PORT || 3001;
 
 // Middleware for handling CORS
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
 });
 
@@ -25,13 +24,13 @@ mongoose
     .then(() => console.log(`Database connected successfully`))
     .catch((err) => console.error('Database connection error:', err));
 
-// Mounting the login route
-app.use('/login', loginRouter); // Assuming your login route is under '/auth/login'
-
-// Default route
-app.use((req, res, next) => {
-    res.send('Welcome to Express');
+// Redirect root URL to the login route
+app.get('/', (req, res) => {
+    res.redirect('/login');
 });
+
+// Mounting the login route
+app.use('/login', loginRouter);
 
 // Starting the server
 app.listen(port, () => {
