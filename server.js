@@ -1,15 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const loginRouter = require('./routes/login');
+const cors = require('cors'); // Import the 'cors' middleware
 require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 3001;
 
 // Middleware for handling CORS
-app.use((req, res, next) => {
-    next();
-});
+app.use(cors()); // Enable CORS for all routes
 
 // Body parsing middleware
 app.use(express.json());
