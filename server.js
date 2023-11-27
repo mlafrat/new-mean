@@ -26,7 +26,7 @@ mongoose
     .catch((err) => console.error('Database connection error:', err));
 
 // Mounting the login route
-app.use('/', loginRouter);
+app.use('/login', loginRouter);
 
 // Default route
 // app.use((req, res, next) => {
