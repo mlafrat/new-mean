@@ -2,7 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose'); // Import mongoose for database connection
 const loginRouter = require('./routes/login'); // Import your login route
 require('dotenv').config()
-app.use(express.urlencoded({ extended: true }));
 const app = express();
 const port = process.env.PORT || 3001;
 
@@ -15,6 +14,7 @@ app.use((req, res, next) => {
 
 // Body parsing middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Database connection setup
 mongoose
@@ -34,6 +34,6 @@ app.use((req, res, next) => {
 });
 
 // Starting the server
-app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}.`);
+app.listen(port, () => {
+    console.log(`Server listening on port ${port}.`);
 });
