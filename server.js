@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const loginRouter = require('./routes/login');
+const registerRouter = require('./routes/register');
 const path = require('path'); // Import the 'path' module
 const cors = require('cors');
 require('dotenv').config();
@@ -25,8 +26,8 @@ mongoose
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-// Mounting the login route
 app.use('/login', loginRouter);
+app.use('/register', registerRouter);
 
 // All other routes should serve the React app
 app.get('*', (req, res) => {
