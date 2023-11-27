@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose'); // Import mongoose for database connection
-const loginRouter = require('./routes/login'); // Import your login route
+const loginRouter = require('./routes/login');
 require('dotenv').config()
 const app = express();
 const port = process.env.PORT || 3001;
