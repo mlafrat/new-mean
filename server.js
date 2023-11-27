@@ -26,12 +26,12 @@ mongoose
     .catch((err) => console.error('Database connection error:', err));
 
 // Mounting the login route
-app.use('/login', loginRouter); // Assuming your login route is under '/auth/login'
+app.use('/', loginRouter);
 
 // Default route
-app.use((req, res, next) => {
-    res.send('Welcome to Express');
-});
+// app.use((req, res, next) => {
+//     res.send('Welcome to Express');
+// });
 
 // Starting the server
 app.listen(port, () => {
